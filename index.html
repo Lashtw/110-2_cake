@@ -83,10 +83,23 @@
             font-size: small;
             color: gray;
         }
+        .visitor-counter {
+            display: inline-block;
+            margin-left: 20px;
+            font-size: medium;
+            color: blue;
+        }
+        .visitor-counter .count {
+            font-weight: bold;
+            color: darkblue;
+        }
     </style>
 </head>
 <body>
-    <h1>110年國中教育會考數學科非選題第2題─切蛋糕模擬器</h1>
+    <h1>
+        110年國中教育會考數學科非選題第2題─切蛋糕模擬器
+        <span class="visitor-counter">您是第<span id="visitorCount" class="count">0</span>位來切蛋糕的數學探險家</span>
+    </h1>
 
     <div class="container">
         <h2>第一個蛋糕：最大切割數量為4</h2>
@@ -295,6 +308,20 @@
         function hideCalculation2() {
             document.getElementById('calculation2').innerHTML = '';
         }
+
+        function updateVisitorCount() {
+            let visitorCount = localStorage.getItem('visitorCount');
+            if (!visitorCount) {
+                visitorCount = 0;
+            }
+            visitorCount = parseInt(visitorCount) + 1;
+            localStorage.setItem('visitorCount', visitorCount);
+            document.getElementById('visitorCount').innerText = visitorCount;
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            updateVisitorCount();
+        });
     </script>
 </body>
 </html>
